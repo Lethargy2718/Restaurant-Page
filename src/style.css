@@ -1,0 +1,187 @@
+*, *::before, *::after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    line-height: 1.5;
+    /* transition: all 0.2s ease-in-out; */
+}
+
+/* *:not(i) {
+    font-family: quicksand;
+} */
+
+ul, li {
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+button {
+    border: none;
+    color: inherit;
+    font: inherit;
+}
+
+button:hover {
+    cursor: pointer;
+}
+/* -----------START--------------- */
+
+:root {
+    --header-size: 5em;
+}
+
+body {
+    color: white;
+    font-family: 'Bebas Neue', sans-serif;
+    display: grid;
+    grid-template-rows: var(--header-size) 1fr;
+    height: 100dvh;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("assets/images/beach.jpg");
+    background-size: cover; 
+    background-position: center center; 
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+header {
+    --padding-hori: clamp(0.5rem, 0.5rem + 1vw ,2rem);
+    position: sticky;
+    top: 0;
+    left: 0;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 100%;
+
+    & > h1 {
+        letter-spacing: 3px;
+        padding: 0 var(--padding-hori);
+    }
+}
+
+.side {
+    display: flex;
+    height: 100%;
+}
+
+.side-buttons ul, .side-icons ul {
+    display: flex;
+    height: 100%;
+}
+
+li {
+    display: flex;
+    align-items: center;
+}
+
+li button {
+    position: relative;
+    background: none;
+    padding: 0.6rem var(--padding-hori);
+    height: 100%;
+}
+
+li button span {
+    display: inline-block;
+}
+
+
+i {
+    font-size: 1.5em;
+    padding: 0.6rem var(--padding-hori);
+    color: white;
+}
+
+i:hover {
+    filter: drop-shadow(0 0 7.5px white);
+}
+
+
+li button:hover {
+    background-color: rgba(0, 0, 0, 0.65);
+
+}
+
+li button::before, li button::after {
+    --line-height: 1px;
+    content: '';
+    position: absolute;
+    top: calc(100% - var(--line-height));
+    height: var(--line-height);
+    background-color: white;
+    width: 0;
+}
+
+li button::before {
+    right: 0
+}
+
+li button::after {
+    left: 0;  
+}
+
+li button:hover::after {
+    width: 50%
+}
+li button:hover::before {
+    width: 50%
+}
+
+.side-buttons {
+    position: relative;
+}
+
+.side-buttons::before {
+    content: '';
+    position: absolute;
+    height: 60%;
+    width: 1px;
+    right: 0;
+    background-color: white;
+}
+
+/*------------------------------*/
+
+#content {
+    display: grid;
+    place-content: center;
+    text-align: center;
+}
+
+#content:has(>.home-content) {
+    display: grid;
+    grid-template-rows: 1fr var(--header-size);
+    place-items: center;
+}
+
+#welcome {
+    font-size: clamp(2.25rem, 1rem + 3vw, 4rem);
+    letter-spacing: 7px;
+}
+
+#welcomeDescription {
+    font-size: clamp(0.3rem, 1rem + 0.5vw, 3rem);
+}
+
+#checkMenu {
+    background: none;
+    border: 1px solid white;
+    width: fit-content;
+    padding: clamp(0.3em, 0.15em + 1.5vw ,1em) 2em;
+    font-size: clamp(1rem, 0.6rem + 0.5vw, 1.2rem);
+    margin: 1em;
+
+    &:hover {
+        background-color: white;
+        color: black;
+    }
+}
+
+/*---------------------------------------*/
