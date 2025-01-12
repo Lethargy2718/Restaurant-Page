@@ -3,7 +3,6 @@
     margin: 0;
     box-sizing: border-box;
     line-height: 1.5;
-    /* transition: all 0.2s ease-in-out; */
 }
 
 /* *:not(i) {
@@ -22,6 +21,7 @@ button {
     border: none;
     color: inherit;
     font: inherit;
+    transition: all 0.2s ease-in-out;
 }
 
 button:hover {
@@ -49,6 +49,7 @@ body {
 header {
     --padding-hori: clamp(0.5rem, 0.5rem + 1vw ,2rem);
     position: sticky;
+    z-index: 999;
     top: 0;
     left: 0;
 }
@@ -76,40 +77,36 @@ nav {
     height: 100%;
 }
 
-li {
+.side li {
     display: flex;
     align-items: center;
 }
 
-li button {
+.side button {
     position: relative;
     background: none;
     padding: 0.6rem var(--padding-hori);
     height: 100%;
 }
 
-li button span {
-    display: inline-block;
-}
-
-
 i {
     font-size: 1.5em;
     padding: 0.6rem var(--padding-hori);
     color: white;
+    transition: filter 0.25s ease-in-out;
 }
 
 i:hover {
-    filter: drop-shadow(0 0 7.5px white);
+    filter: drop-shadow(0 0 10px white);
 }
 
 
-li button:hover {
+.side button:hover {
     background-color: rgba(0, 0, 0, 0.65);
 
 }
 
-li button::before, li button::after {
+.side button::before, .side button::after {
     --line-height: 1px;
     content: '';
     position: absolute;
@@ -117,20 +114,21 @@ li button::before, li button::after {
     height: var(--line-height);
     background-color: white;
     width: 0;
+    transition: width 0.2s ease-in-out;
 }
 
-li button::before {
+.side button::before {
     right: 0
 }
 
-li button::after {
+.side button::after {
     left: 0;  
 }
 
-li button:hover::after {
+.side button:hover::after {
     width: 50%
 }
-li button:hover::before {
+.side button:hover::before {
     width: 50%
 }
 
@@ -147,18 +145,13 @@ li button:hover::before {
     background-color: white;
 }
 
-/*------------------------------*/
+/*-------------HOME------------*/
 
-#content {
-    display: grid;
-    place-content: center;
-    text-align: center;
-}
-
-#content:has(>.home-content) {
+#content:has(.home-content), #content:has(#coco) {
     display: grid;
     grid-template-rows: 1fr var(--header-size);
     place-items: center;
+    text-align: center;
 }
 
 #welcome {
@@ -184,4 +177,205 @@ li button:hover::before {
     }
 }
 
-/*---------------------------------------*/
+/*------------------MENU---------------------*/
+
+/*-----DISHES-----*/
+
+body:has(.menu-content) {
+    height: fit-content;
+}
+
+.menu-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 800px 1fr;
+    place-items: center;
+}
+
+.title {
+    font-size: clamp(2.25rem, 1rem + 3vw, 4rem);
+    letter-spacing: 7px;
+    filter: drop-shadow(0 0 3px white);
+}
+
+.carousel {
+    color: white;
+    background-color: rgba(0, 0, 0, 0.65);
+    position: relative;
+    height: 80%;
+    width: clamp(300px, 80%, 450px);
+    display: flex;
+    flex-direction: column;
+}
+
+.carousel-slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.carousel-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    overflow: hidden;
+}
+
+.carousel-track-container {
+    position: relative;
+    height: 60%;
+}
+
+.carousel-button {
+    --offset: 0.2em;
+
+    position: absolute;
+    background: none;
+    border: 0;
+    top: 50%;
+    transform: translateY(-50%);
+
+    & img {
+        filter: brightness(0) invert(1);
+        width: 2rem;
+        height: 4rem;
+    }
+}
+
+.carousel-button--right {
+    left: calc(100% + var(--offset));
+}
+
+.carousel-button--left {
+    right: calc(100% + var(--offset));
+}
+
+.carousel-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 1.5em;
+    padding-top: 1em;
+    padding-bottom: 0.8em;
+}
+
+.carousel-indicator {
+    background-color: rgba(255,255,255,0.6);
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    margin: 0 6px;
+}
+
+.carousel-indicator:hover {
+    background-color: rgba(255,255,255,0.8);
+}
+
+.carousel-track-container-text {
+    position: relative;
+    flex: 1;
+    font-size: clamp(1rem, 2rem, 2rem);
+    object-fit: cover;
+}
+
+.carousel-slide-text {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    padding: 0.5em;
+}
+
+.description-header {
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.food-description {
+    font-size: 1.2rem;
+}
+
+.carousel-indicator.current-slide {
+    background-color: rgb(255, 255, 255);
+    filter: drop-shadow(0 0 2rem white);
+}
+
+/*-----BEVERAGES-----*/
+
+.beverages-title {
+    position: relative;
+    grid-row: 2 / 3;
+    grid-column: 1 / -1;
+    height: 5em;
+    display: flex;
+    align-items: center;
+    
+    --word-offset: 10%;
+    --screen-offset: 10%;
+    --init-width: 200%;
+    --width: min(var(--init-width), calc((100vw - 2 * var(--screen-offset) - 2 * var(--word-offset) - 100%)) / 2);
+}
+
+.beverages-title::before, .beverages-title::after {
+    content: '';
+    background-color: white;
+    position: absolute;
+    height: 2px;
+    top: 50%;
+    width: var(--width);
+}
+
+.beverages-title::before {  
+    left: calc(100% + var(--word-offset));
+}
+
+.beverages-title::after {
+    right: calc(100% + var(--word-offset));
+}
+
+.drinks-menu {
+    grid-column: 1 / -1;
+    grid-row: 3 / -1;
+    min-height: 600px;
+    background-color: rgba(0,0,0,0.65);
+    width: 90%;
+    margin-bottom: 5em;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    padding: 3rem;
+}
+
+.drinks-one {
+    grid-area: 1 / 1 / 2 / 2;
+}
+
+.drinks-two {
+    grid-area: 2 / 2 / 3 / 3;
+}
+
+.drinks-table { 
+    border-left: 1px solid white;
+    padding: 1em;
+    & td { padding: 0.3em 0.2em;}
+}
+
+.drinks-menu {
+    font-size: clamp(1rem, 0.7rem + 2vw, 2rem);
+}
+
+.drinks-img {
+    object-fit: cover;
+    width: 80%;
+    height: min(80%, 600px);
+    place-self: center;
+}
+
+/********COCONUT******/
+#coco {
+    height: 30%;
+    width: 30%;
+}
